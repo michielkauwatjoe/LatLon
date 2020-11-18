@@ -5,28 +5,24 @@
 
 Methods for representing geographic coordinates (latitude and longitude) including the ability to:
     
-	* Convert lat/lon strings from almost any format into a *LatLon* object (analogous to the datetime 
-      library's *stptime* method)
-    * Automatically store decimal degrees, decimal minutes, and degree, minute, second information in 
-      a *LatLon* object
-    * Output lat/lon information into a formatted string (analogous to the datetime library's *strftime* 
-      method)
-    * Project lat/lon coordinates into some other proj projection
-    * Calculate distance and heading between lat/lon pairs using either the FAI or WGS84 approximation 
-    * Create a new *LatLon* object by offsetting an initial coordinate by a distance and heading
-    * Subtracting one *LatLon* object from another creates a *GeoVector* object with distance and heading 
-      attributes (analogous to the datetime library's *timedelta* object)
-    * Adding or subtracting a *Latlon* object and a *GeoVector* object creates a new *LatLon* object with 
-      the coordinates adjusted by the *GeoVector* object's distance and heading
-    * *GeoVector* objects can be added, subtracted, multiplied or divided
+* Convert lat/lon strings from almost any format into a *LatLon* object (analogous to the datetime 
+  library's *stptime* method)
+* Automatically store decimal degrees, decimal minutes, and degree, minute, second information in 
+  a *LatLon* object
+* Output lat/lon information into a formatted string (analogous to the datetime library's *strftime* 
+  method)
+* Project lat/lon coordinates into some other proj projection
+* Calculate distance and heading between lat/lon pairs using either the FAI or WGS84 approximation 
+* Create a new *LatLon* object by offsetting an initial coordinate by a distance and heading
+* Subtracting one *LatLon* object from another creates a *GeoVector* object with distance and heading 
+  attributes (analogous to the datetime library's *timedelta* object)
+* Adding or subtracting a *Latlon* object and a *GeoVector* object creates a new *LatLon* object with 
+  the coordinates adjusted by the *GeoVector* object's distance and heading
+* *GeoVector* objects can be added, subtracted, multiplied or divided
 
 ## Installation
 
-*LatLon* was developed for Python 2.7, currently adapting for Python 3.x. d      
-
-Requires the following non-standard libraries:
-
-	* *pyproj*
+*LatLon* was developed for Python 2.7, currently adapting for Python 3.x.  
 
 ## Usage Notes
 
@@ -51,22 +47,22 @@ keyword used in *datetime's* *strftime* function. Indicator characters (e.g. *H*
 a specific separator character (*%*) to specify the way in which a coordinate string is formatted. Possible 
 values are as follows:
           
-          *H* is a hemisphere identifier (e.g. N, S, E or W)
-          
-          *D* is a coordinate in decimal degrees notation (e.g. 5.833)
-          
-          *d* is a coordinate in degrees notation (e.g. 5)
-          
-          *M* is a coordinate in decimal minutes notation (e.g. 54.35)
-          
-          *m* is a coordinate in minutes notation (e.g. 54)
-          
-          *S* is a coordinate in seconds notation (e.g. 28.93)
-          
-          Any other characters (e.g. ' ' or ', ') will be treated as a separator between the above components.
-          
-          All components should be separated by the *%* character. For example, if the coord_str is '5, 52, 
-          59.88_N', the format_str would be 'd%, %m%, %S%_%H'
+*H* is a hemisphere identifier (e.g. N, S, E or W)
+
+*D* is a coordinate in decimal degrees notation (e.g. 5.833)
+
+*d* is a coordinate in degrees notation (e.g. 5)
+
+*M* is a coordinate in decimal minutes notation (e.g. 54.35)
+
+*m* is a coordinate in minutes notation (e.g. 54)
+
+*S* is a coordinate in seconds notation (e.g. 28.93)
+
+Any other characters (e.g. ' ' or ', ') will be treated as a separator between the above components.
+
+All components should be separated by the *%* character. For example, if the coord_str is '5, 52, 
+59.88_N', the format_str would be 'd%, %m%, %S%_%H'
 
 *Important*
 
@@ -105,13 +101,13 @@ Create a *LatLon* object from coordinates::
     >> palmyra = LatLon(5.8833, -162.0833) # Same thing but simpler!
     >> palmyra = LatLon(Latitude(degree = 5, minute = 52, second = 59.88), 
     >>                  Longitude(degree = -162, minute = -4.998) # or more complicated!
-    >> print palmyra.to_string('d% %m% %S% %H') # Print coordinates to degree minute second
+    >> print(palmyra.to_string('d% %m% %S% %H')) # Print coordinates to degree minute second
     ('5 52 59.88 N', '162 4 59.88 W')
 
 Create a *Latlon* object from a formatted string::
 
     >> palmyra = string2latlon('5 52 59.88 N', '162 4 59.88 W', 'd% %m% %S% %H')
-    >> print palmyra.to_string('d%_%M') # Print coordinates as degree minutes separated by underscore
+    >> print(palmyra.to_string('d%_%M')) # Print coordinates as degree minutes separated by underscore
     ('5_52.998', '-162_4.998')
 
 Perform some calculations::
@@ -119,23 +115,23 @@ Perform some calculations::
     >> palmyra = LatLon(Latitude(5.8833), Longitude(-162.0833)) # Location of Palmyra Atoll
     >> honolulu = LatLon(Latitude(21.3), Longitude(-157.8167)) # Location of Honolulu, HI
     >> distance = palmyra.distance(honolulu) # WGS84 distance in km
-    >> print distance
+    >> print(distance)
     1766.69130376
-    >> print palmyra.distance(honolulu, ellipse = 'sphere') # FAI distance in km
+    >> print(palmyra.distance(honolulu, ellipse = 'sphere')) # FAI distance in km
     1774.77188181
     >> initial_heading = palmyra.heading_initial(honolulu) # Heading from Palmyra to Honolulu on WGS84 ellipsoid
-    >> print initial_heading
+    >> print(initial_heading)
     14.6907922022
     >> hnl = palmyra.offset(initial_heading, distance) # Reconstruct Honolulu based on offset from Palmyra
-    >> print hnl.to_string('D') # Coordinates of Honolulu
+    >> print(hnl.to_string('D')) # Coordinates of Honolulu
     ('21.3', '-157.8167')
     
 Manipulate *LatLon* objects using *GeoVectors*::
 
     >> vector = (honolulu - palmyra) * 2 # A GeoVector with 2x the magnitude of a vector from palmyra to honolulu
-    >> print vector # Print heading and magnitude
+    >> print(vector) # Print heading and magnitude
     14.6907922022 3533.38260751
-    print palmyra + (vector/2.0) # Recreate the coordinates of Honolulu by adding half of vector to palmyra
+    >> print(palmyra + (vector/2.0)) # Recreate the coordinates of Honolulu by adding half of vector to palmyra
     21.3, -157.8167
     
 ### Version
