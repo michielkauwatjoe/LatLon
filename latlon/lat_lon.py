@@ -1,47 +1,44 @@
-
-"""
-Methods for representing geographic coordinates (latitude and longitude).
-
-Features:
-    Convert lat/lon strings from any format into a LatLon object
-    Automatically store decimal degrees, decimal minutes, and degree, minute, second
-      information in a LatLon object
-    Output lat/lon information into a formatted string
-    Project lat/lon coordinates into some other proj projection
-    Calculate distances between lat/lon pairs using either the FAI or WGS84 approximation
-
-Written July 22, 2014
-Original author: Gen Del Raye
-"""
+#!/usr/bin/env python3
+# Methods for representing geographic coordinates (latitude and longitude).
+#
+# Features:
+# * Convert lat/lon strings from any format into a LatLon object
+# * Automatically store decimal degrees, decimal minutes, and degree, minute,
+# * second information in a LatLon object
+# * Output lat/lon information into a formatted string
+# * Project lat/lon coordinates into some other proj projection
+# * Calculate distances between lat/lon pairs using either the FAI or WGS84 approximation
+# * Originally written July 22, 2014
+# * Original author: Gen Del Raye
 
 import math
 import re
-import pyproj
 import warnings
 import abc
+import pyproj
 
-# TODO: Write methods to convert -180 to 180 longitudes to 0 to 360 and vice versa
+# TODO: Write methods to convert -180 to 180 longitudes to 0 to 360 and vice versa.
 
 def cmp(a, b):
     return (a > b) - (a < b)
 
 class GeoCoord:
-    '''
-    Abstract class representing geographic coordinates (i.e. latitude or longitude)
-    Not meant to be used directly - access through Subclasses Latitude() and Longitude()
-    '''
+    """Abstract class representing geographic coordinates (i.e. latitude or
+    longitude). Not meant to be used directly - access through Subclasses
+    Latitude() and Longitude()."""
+
     __metaclass__ = abc.ABCMeta
 
     def __init__(self, degree = 0, minute = 0, second = 0):
-        '''
-        Initialize a GeoCoord object
+        """Initializes a GeoCoord object.
+
         Inputs:
             degree (scalar) - integer or decimal degrees. If decimal degrees are given (e.g. 5.83),
               the fractional values (0.83) will be added to the minute and second variables.
             minute (scalar) - integer or decimal minutes. If decimal minutes are given (e.g. 49.17),
               the fractional values (0.17) will be added to the second variable.
             second (scalar) - decimal minutes.
-        '''
+        """
         self.degree = float(degree)
         self.minute = float(minute)
         self.second = float(second)
