@@ -26,6 +26,8 @@ Methods for representing geographic coordinates (latitude and longitude) includi
 
     pip install -e .
 
+Fetched original from [https://pypi.org/project/LatLon/](https://pypi.org/project/LatLon/). Two earlier attempts have been made to update to Python3, see [https://pypi.org/project/LatLon23/](https://pypi.org/project/LatLon23/), [https://pypi.org/project/latlon3/](https://pypi.org/project/latlon3/).
+
 ## Usage Notes
 
 Usage of *LatLon* is primarily through the class *LatLon*, which is designed to hold a single pair of 
@@ -185,3 +187,4 @@ Manipulate *LatLon* objects using *GeoVectors*::
 **0.50 (AUGUST/20/2014)**
 
 * First release
+}{{{
