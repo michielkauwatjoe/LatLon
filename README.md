@@ -47,17 +47,12 @@ keyword used in *datetime's* *strftime* function. Indicator characters (e.g. *H*
 a specific separator character (*%*) to specify the way in which a coordinate string is formatted. Possible 
 values are as follows:
           
-*H* is a hemisphere identifier (e.g. N, S, E or W)
-
-*D* is a coordinate in decimal degrees notation (e.g. 5.833)
-
-*d* is a coordinate in degrees notation (e.g. 5)
-
-*M* is a coordinate in decimal minutes notation (e.g. 54.35)
-
-*m* is a coordinate in minutes notation (e.g. 54)
-
-*S* is a coordinate in seconds notation (e.g. 28.93)
+* *H* is a hemisphere identifier (e.g. N, S, E or W)
+* *D* is a coordinate in decimal degrees notation (e.g. 5.833)
+* *d* is a coordinate in degrees notation (e.g. 5)
+* *M* is a coordinate in decimal minutes notation (e.g. 54.35)
+* *m* is a coordinate in minutes notation (e.g. 54)
+* *S* is a coordinate in seconds notation (e.g. 28.93)
 
 Any other characters (e.g. ' ' or ', ') will be treated as a separator between the above components.
 
@@ -142,50 +137,49 @@ Manipulate *LatLon* objects using *GeoVectors*::
 
 **1.0.2 (OCTOBER/14/2014)**
 
-	* Class *GeoVector* is now an abstract class to ensure that any subclasses use the correct API
-	
-	* Added methods *range180* and *range360* to class *Longitude* to interconvert between longitudes reported -180
-	  to 180 format and those reported in 0 to 360 format. To ensure that all operations such as hemisphere assignment
-	  work as expected, longitudes reported in 0 to 360 format are automatically converted into -180 to 180 format
-	  when the *Longitude* object is initialized.
+* Class *GeoVector* is now an abstract class to ensure that any subclasses use the correct API
+* Added methods *range180* and *range360* to class *Longitude* to interconvert between longitudes reported -180
+  to 180 format and those reported in 0 to 360 format. To ensure that all operations such as hemisphere assignment
+  work as expected, longitudes reported in 0 to 360 format are automatically converted into -180 to 180 format
+  when the *Longitude* object is initialized.
 
 **1.0.1 (SEPTEMBER/2/2014)**
 
-	* Fixed issue with where attribute *theta* in *GeoVector* was treated in some cases like a heading (i.e. starting 
-	  with due north and continuing clockwise) even though it was in fact an angle (i.e. starting with (1, 0) and 
-	  continuing anti-clockwise). The attribute name has now been changed to *heading* to eliminate confusion. The 
-	  local variable *theta* is used for computations involving angle.
-	* Added testing functions with *pytest* for class *LatLon* and *GeoVector*
-	* Added *almost_equal* methods to class *LatLon* and *GeoVector* to deal with float errors in decimal degree 
-	  specification
-	* *LatLon.project* now returns *(x, y)* instead of *(y, x)* to be more consistent with the accepted convention.
+* Fixed issue with where attribute *theta* in *GeoVector* was treated in some cases like a heading (i.e. starting 
+  with due north and continuing clockwise) even though it was in fact an angle (i.e. starting with (1, 0) and 
+  continuing anti-clockwise). The attribute name has now been changed to *heading* to eliminate confusion. The 
+  local variable *theta* is used for computations involving angle.
+* Added testing functions with *pytest* for class *LatLon* and *GeoVector*
+* Added *almost_equal* methods to class *LatLon* and *GeoVector* to deal with float errors in decimal degree 
+  specification
+* *LatLon.project* now returns *(x, y)* instead of *(y, x)* to be more consistent with the accepted convention.
 
 **0.91 (AUGUST/28/2014)**
 
-	* *degree*, *minute* and *second* attributes for *GeoCoord* class are now coerced to type *float*
+* *degree*, *minute* and *second* attributes for *GeoCoord* class are now coerced to type *float*
 
 **0.90 (AUGUST/28/2014)**
 
-	* Updated magic methods for *GeoCoord* class
-	* Added option for instantiating *LatLon* from scalars
+* Updated magic methods for *GeoCoord* class
+* Added option for instantiating *LatLon* from scalars
 
 **0.80 (AUGUST/27/2014)**
 
-	* Added *GeoVector* class to handle vectors between two *LatLon* objects
-	* Cleaned up *__str__* and *__repr__* methods for *LatLon*, *Latitude*, *Longitude*, *GeoCoord*, and *GeoVector* 
-	  classes
+* Added *GeoVector* class to handle vectors between two *LatLon* objects
+* Cleaned up *__str__* and *__repr__* methods for *LatLon*, *Latitude*, *Longitude*, *GeoCoord*, and *GeoVector* 
+  classes
 
 **0.70 (AUGUST/27/2014)**
 
-	* Deprecated *LatLon.distance_sphere* method. From now on use *distance(other, ellipse = 'sphere')* instead
-	* Added *LatLon.bearing* method to return the initial bearing between two *LatLon* objects
-	* Added *LatLon.offset* method to return a new LatLon object that is computed from an initial LatLon object plus 
-	  a bearing and distance
+* Deprecated *LatLon.distance_sphere* method. From now on use *distance(other, ellipse = 'sphere')* instead
+* Added *LatLon.bearing* method to return the initial bearing between two *LatLon* objects
+* Added *LatLon.offset* method to return a new LatLon object that is computed from an initial LatLon object plus 
+  a bearing and distance
 
 **0.60 (AUGUST/27/2014)**
 
-	* Added compatibility with comparison, negation, addition and multiplication magic methods
+* Added compatibility with comparison, negation, addition and multiplication magic methods
 
 **0.50 (AUGUST/20/2014)**
 
-	* First release
+* First release
