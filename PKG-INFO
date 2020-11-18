@@ -1,10 +1,10 @@
 Metadata-Version: 1.1
-Name: LatLon
-Version: 1.0.2
+Name: latlon
+Version: 1.0.3
 Summary: Methods for representing geographic coordinates
 Home-page: UNKNOWN
-Author: Gen Del Raye
-Author-email: gdelraye@hawaii.edu
+Author: Gen Del Raye, Michiel Kauw-A-Tjoe
+Author-email: gdelraye@hawaii.edu, michielkauwatjoe@gmail.com
 License: UNKNOWN
 Description: UNKNOWN
 Keywords: latitude,longitude,decimal degrees,degree minutes,distance

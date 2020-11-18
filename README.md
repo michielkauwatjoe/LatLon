@@ -22,7 +22,9 @@ Methods for representing geographic coordinates (latitude and longitude) includi
 
 ## Installation
 
-*LatLon* was developed for Python 2.7, currently adapting for Python 3.x.  
+*LatLon* was originally developed for Python 2.7. It is currently being adapting for Python 3.x. You can test it locally in edit mode:
+
+    pip install -e .
 
 ## Usage Notes
 

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 '''
 Test routines for class GeoVector in package LatLon
 Designed for use with pytest
@@ -20,7 +21,7 @@ def test_constructor():
     vector1 = GeoVector(dx = dx, dy = dy)
     vector2 = GeoVector(initial_heading = initial_heading, distance = magnitude)
     assert vector1.almost_equals(vector2) # Error in Updating GeoVector angle and magnitude from dx and dy
-    
+
 def test_magic():
     '''
     Test Geovector magic methods
@@ -40,4 +41,4 @@ def test_magic():
     assert vector1x2 > vector1 # __cmp__ method giving unexpected result
     assert vector1x2.almost_equals(vector1 + vector1) # Failed to recreate vector by addition and multiplication
     assert str(vector1x2) == '0.0, 2' # String conversion failed
-    
+

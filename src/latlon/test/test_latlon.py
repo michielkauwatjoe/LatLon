@@ -1,11 +1,6 @@
-'''
-Test routines for class LatLon in package LatLon
-Designed for use with pytest
-
-Created on Sep 2, 2014
-
-@author: gdelraye
-'''
+#!/usr/bin/env python3
+# Test routines for class LatLon in package LatLon
+# Designed for use with pytest
 
 from .. import LatLon, string2latlon, Latitude, Longitude
 import pyproj
@@ -40,7 +35,7 @@ def test_LatLon_fromstring():
     # Convert degrees minutes second string with fancy separators to LatLon object:
     palmyra = string2latlon(lat_str, lon_str, 'H%_%d%deg %M')
     assert str(palmyra) == '5.8833, -162.0833' # Failure to convert from hemisphere, degree, minutes string
-    
+
 def test_LatLon_complex():
     '''
     Test LatLon method complex
@@ -49,7 +44,7 @@ def test_LatLon_complex():
     complex_coords = palmyra.complex() # Convert lat/lon coordinate to single complex number
     assert complex_coords.real == 5.8833 # Failed to retrieve latitude from complex coordinate
     assert complex_coords.imag == -162.0833 # Failed to retrieve longitude from complex coordinate
-    
+
 def test_LatLon_heading():
     '''
     Test LatLon methods heading_initial and heading_reverse
@@ -80,7 +75,7 @@ def test_LatLon_heading():
     reverse_heading = shanghai.heading_reverse(alexandria) # Reverse heading from Shanghai to Alexandria
     # Check handling of equal latitude coordinates by heading_initial:
     assert '%.3f' %(reverse_heading) == true_heading
-    
+
 def test_LatLon_distance():
     '''
     Test LatLon method distance
@@ -96,7 +91,7 @@ def test_LatLon_distance():
     true_distance = '7645.673' # Distance from Honolulu to North Pole in km
     wgs84_distance = honolulu.distance(geographic_north)
     assert '%.3f' %(wgs84_distance) == true_distance # Failed to calculate WGS84 distance from north pole
-    
+
 def test_LatLon_offset():
     '''
     Test LatLon method offset
@@ -110,7 +105,7 @@ def test_LatLon_offset():
     vector = honolulu - palmyra # Same process with GeoVectors
     vector_hnl = palmyra + vector # Reconstruct lat/lon for Honolulu based on offset from Palmyra
     assert honolulu.almost_equal(vector_hnl)
-    
+
 def test_LatLon_project():
     '''
     Test LatLon method project
@@ -120,4 +115,4 @@ def test_LatLon_project():
     x, y = palmyra.project(projection)
     utm_x, utm_y = 822995, 651147 # True projected coordinates to the nearest meter
     assert int(x) == utm_x and int(y) == utm_y # Error in computing projected coordinates for Palmyra Atoll'
-    
+
